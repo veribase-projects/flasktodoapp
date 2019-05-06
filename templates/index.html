@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+   <script src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js"></script>
+
+
+    <title>
+   ToDOAPP
+    </title>
+</head>
+</body>
+<div style="margin-top:100px;" class="container">
+<h3>Todo List</h3>
+<hr>
+<form action="/add" method="post">
+ <div class="form-group">
+    <label for="formGroupExampleInput">Todo Başlık</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" name="title" placeholder="Todo Giriniz">
+    <br>
+    <button type="submit" class="btn btn-danger">Ekle</button>
+    <hr>
+  </div>
+
+
+  {% if todos==[] %}
+  <div class="alert alert-warning" role="alert">
+  Yapılacaklar Listesinde Kayıt Bulunamadı
+</div>
+  
+  {% else %}
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Todo Başlık</th>
+      <th scope="col">Todo Durum</th>
+      <th scope="col">Durum Güncelle</th>
+      <th scope="col">Durum Sil</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {% for todo  in todos  %}
+<tr>
+      <th scope="row">{{todo.id}}</th>
+      <td>{{todo.title}}</td>
+      {% if todo.complete==False %}
+       <td>Tamamlanmadı</td>
+      {% else %}
+       <td>Tamamlandı</td>
+      {% endif %}
+     
+      <td><a href="/complete/{{todo.id}}" class="btn btn-danger">Tamamla</a></td>
+      <td><a href="/delete/{{todo.id}}" class="btn btn-danger">Sil</a></td>
+   
+    </tr>
+  
+  {% endfor %}
+   
+  </tbody>
+</table>
+  {% endif %}
+
+</form>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+</body>
+
+
+</html>
